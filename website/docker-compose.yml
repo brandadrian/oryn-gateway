@@ -1,0 +1,24 @@
+services:
+  website:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.website.rule=Host(`website.homelab.brandadrian.com`)
+      - traefik.http.routers.website.entrypoints=websecure
+      - traefik.http.routers.website.tls.certresolver=le
+      - traefik.http.routers.website.service=website
+      # lokal testen: https://website.localhost (selbstsigniertes Zertifikat, kein Let's Encrypt)
+      - traefik.http.routers.website-local.rule=Host(`website.localhost`)
+      - traefik.http.routers.website-local.entrypoints=websecure
+      - traefik.http.routers.website-local.tls=true
+      - traefik.http.routers.website-local.service=website
+      - traefik.http.services.website.loadbalancer.server.port=80
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

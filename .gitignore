@@ -1,0 +1,35 @@
+# Let's-Encrypt-Zertifikate und private Keys (niemals committen!)
+letsencrypt/
+acme.json*
+*.pem
+*.key
+*.crt
+
+# Secrets / lokale Konfiguration
+.env
+*.env
+!.env.example
+docker-compose.override.yml
+compose.override.yml
+
+# App-Daten (Volumes)
+data/
+*/data/
+
+# Logs
+*.log
+logs/
+
+# Windows
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+
+# Editoren / IDEs
+.vscode/
+.idea/
+*.swp
+*~
