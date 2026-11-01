@@ -25,10 +25,14 @@ flowchart LR
         router["Router<br/>Port-Forwarding 80/443"]
         subgraph pc[Windows-PC]
             fw[Windows-Firewall]
+            ollama[(Ollama nativ · GPU · nur intern)]
             subgraph docker["Docker Desktop · Netzwerk: proxy"]
                 traefik[Traefik<br/>Reverse Proxy]
                 whoami[whoami]
                 website[website]
+                saba[saba-Chat]
+                swl[Shopware-Launcher]
+                sw[(sw-* Instanzen)]
                 app[weitere Apps]
             end
         end
@@ -39,6 +43,11 @@ flowchart LR
     router --> fw --> traefik
     traefik -- "Host-Regel (Labels)" --> whoami
     traefik --> website
+    traefik --> saba
+    saba --> ollama
+    traefik --> swl
+    swl -- "Docker-API" --> sw
+    traefik --> sw
     traefik --> app
     le -- "HTTP-Challenge :80" --> router
     traefik -. "Zertifikat anfordern" .-> le
@@ -50,6 +59,8 @@ flowchart LR
 traefik/   Reverse Proxy (läuft einmal)
 whoami/    Beispiel-App (zeigt Request-Infos)
 website/   Beispiel-App (statische HTML-Seite mit nginx)
+saba/      Einfacher Chat mit lokalem Modell (Ollama nativ unter Windows)
+shopware-launcher/  Web-App zum Starten von Shopware-Instanzen (dockware)
 docs/      Detail-Dokumentation
 ```
 
@@ -90,4 +101,6 @@ Nach Änderungen an Labels immer: `docker compose up -d --force-recreate`
 | Firewall, Docker-Netzwerk, Konfiguration, Starten, Testen | [docs/windows-docker.md](docs/windows-docker.md) |
 | Lokal testen (`*.localhost`) | [docs/lokal-testen.md](docs/lokal-testen.md) |
 | Neue App hinzufügen | [docs/neue-app.md](docs/neue-app.md) |
+| Saba-Chat mit lokalem Modell | [docs/saba.md](docs/saba.md) |
+| Shopware-Launcher | [docs/shopware-launcher.md](docs/shopware-launcher.md) |
 | Troubleshooting | [docs/troubleshooting.md](docs/troubleshooting.md) |

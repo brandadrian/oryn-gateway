@@ -1,0 +1,15 @@
+{
+  "name": "shopware-launcher",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Startet Shopware-Instanzen (dockware) per Web-UI hinter Traefik",
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "check": "find . -name '*.js' -not -path './node_modules/*' -exec node --check {} \\;"
+  }
+}

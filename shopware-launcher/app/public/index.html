@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shopware-Launcher</title>
+<link rel="stylesheet" href="/css/style.css">
+<script type="module" src="/js/app.js"></script>
+</head>
+<body>
+<main>
+  <h1>Shopware-Launcher</h1>
+  <p class="sub">Shopware-Instanz mit Demodaten starten (dockware). Maximal <span id="max">3</span> gleichzeitig.</p>
+
+  <div class="card">
+    <form id="form">
+      <label>Name
+        <input type="text" id="name" placeholder="z.B. test" pattern="[a-z0-9-]{1,20}" required>
+      </label>
+      <label>Shopware-Version
+        <select id="version" required><option>lade…</option></select>
+      </label>
+      <label class="check"><input type="checkbox" id="autoDelete" checked>&nbsp;nach <span id="ttl">60</span>&nbsp;Min. löschen</label>
+      <button id="submit">Starten</button>
+    </form>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <div id="list"></div>
+</main>
+</body>
+</html>

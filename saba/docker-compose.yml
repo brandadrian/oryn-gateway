@@ -1,0 +1,27 @@
+services:
+  saba:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.saba.rule=Host(`saba.homelab.brandadrian.com`)
+      - traefik.http.routers.saba.entrypoints=websecure
+      - traefik.http.routers.saba.tls.certresolver=le
+      - traefik.http.routers.saba.service=saba
+      # lokal testen: https://saba.localhost (selbstsigniertes Zertifikat, kein Let's Encrypt)
+      - traefik.http.routers.saba-local.rule=Host(`saba.localhost`)
+      - traefik.http.routers.saba-local.entrypoints=websecure
+      - traefik.http.routers.saba-local.tls=true
+      - traefik.http.routers.saba-local.service=saba
+      - traefik.http.services.saba.loadbalancer.server.port=80
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

@@ -1,0 +1,36 @@
+services:
+  shopware-launcher:
+    image: node:22-alpine
+    container_name: shopware-launcher
+    restart: unless-stopped
+    working_dir: /app
+    command: node server.js
+    env_file: .env
+    environment:
+      - DOMAIN=homelab.brandadrian.com
+      - DOCKER_NETWORK=proxy
+      - MAX_INSTANCES=3
+      - SSH_PORT_START=22001     # Instanzen bekommen 22001, 22002, 22003
+      - AUTO_DELETE_MINUTES=60
+    volumes:
+      - ./app:/app:ro
+      # Vollzugriff auf Docker (zum Starten der Instanzen) -> Launcher nur mit Passwort!
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.shopware.rule=Host(`shopware.homelab.brandadrian.com`)
+      - traefik.http.routers.shopware.entrypoints=websecure
+      - traefik.http.routers.shopware.tls.certresolver=le
+      - traefik.http.routers.shopware.service=shopware
+      # lokal testen: https://shopware.localhost
+      - traefik.http.routers.shopware-local.rule=Host(`shopware.localhost`)
+      - traefik.http.routers.shopware-local.entrypoints=websecure
+      - traefik.http.routers.shopware-local.tls=true
+      - traefik.http.routers.shopware-local.service=shopware
+      - traefik.http.services.shopware.loadbalancer.server.port=3000
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
