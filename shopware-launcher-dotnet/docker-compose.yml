@@ -1,0 +1,36 @@
+# .NET-Variante des Shopware-Launchers. Verwaltet dieselben Container wie shopware-launcher/
+# -> nur eine der beiden Varianten laufen lassen.
+services:
+  shopware-launcher-dotnet:
+    build: .
+    image: shopware-launcher-dotnet
+    container_name: shopware-launcher-dotnet
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - Launcher__Domain=homelab.brandadrian.com
+      - Launcher__Network=proxy
+      - Launcher__MaxInstances=3
+      - Launcher__SshPortStart=22001     # Instanzen bekommen 22001, 22002, 22003
+      - Launcher__AutoDeleteMinutes=60
+    volumes:
+      # Vollzugriff auf Docker (zum Starten der Instanzen) -> Launcher nur mit Passwort!
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.shopware-dotnet.rule=Host(`shopware-dotnet.homelab.brandadrian.com`)
+      - traefik.http.routers.shopware-dotnet.entrypoints=websecure
+      - traefik.http.routers.shopware-dotnet.tls.certresolver=le
+      - traefik.http.routers.shopware-dotnet.service=shopware-dotnet
+      # lokal testen: https://shopware-dotnet.localhost
+      - traefik.http.routers.shopware-dotnet-local.rule=Host(`shopware-dotnet.localhost`)
+      - traefik.http.routers.shopware-dotnet-local.entrypoints=websecure
+      - traefik.http.routers.shopware-dotnet-local.tls=true
+      - traefik.http.routers.shopware-dotnet-local.service=shopware-dotnet
+      - traefik.http.services.shopware-dotnet.loadbalancer.server.port=8080
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

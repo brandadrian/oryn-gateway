@@ -61,6 +61,7 @@ whoami/    Beispiel-App (zeigt Request-Infos)
 website/   Beispiel-App (statische HTML-Seite mit nginx)
 saba/      Einfacher Chat mit lokalem Modell (Ollama nativ unter Windows)
 shopware-launcher/  Web-App zum Starten von Shopware-Instanzen (dockware)
+shopware-launcher-dotnet/  dasselbe in ASP.NET Core 10 (nur eine Variante laufen lassen)
 docs/      Detail-Dokumentation
 ```
 
@@ -103,4 +104,5 @@ Nach Änderungen an Labels immer: `docker compose up -d --force-recreate`
 | Neue App hinzufügen | [docs/neue-app.md](docs/neue-app.md) |
 | Saba-Chat mit lokalem Modell | [docs/saba.md](docs/saba.md) |
 | Shopware-Launcher | [docs/shopware-launcher.md](docs/shopware-launcher.md) |
+| Shopware-Launcher (.NET) | [docs/shopware-launcher-dotnet.md](docs/shopware-launcher-dotnet.md) |
 | Troubleshooting | [docs/troubleshooting.md](docs/troubleshooting.md) |
