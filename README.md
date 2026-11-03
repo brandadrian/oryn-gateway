@@ -32,6 +32,7 @@ flowchart LR
                 website[website]
                 saba[saba-Chat]
                 owui[Open WebUI]
+                oapi[ollama-api<br/>API-Key]
                 swl[Shopware-Launcher]
                 sw[(sw-* Instanzen)]
                 app[weitere Apps]
@@ -48,6 +49,8 @@ flowchart LR
     saba --> ollama
     traefik --> owui
     owui --> ollama
+    traefik --> oapi
+    oapi --> ollama
     traefik --> swl
     swl -- "Docker-API" --> sw
     traefik --> sw
@@ -64,6 +67,7 @@ whoami/    Beispiel-App (zeigt Request-Infos)
 website/   Beispiel-App (statische HTML-Seite mit nginx)
 saba/      Einfacher Chat mit lokalem Modell (Ollama nativ unter Windows)
 openwebui/ Chat und Modellverwaltung mit Login (Open WebUI)
+ollama-api/ Ollama-API von aussen mit API-Key
 shopware-launcher/  Web-App zum Starten von Shopware-Instanzen (dockware)
 shopware-launcher-dotnet/  dasselbe in ASP.NET Core 10 (nur eine Variante laufen lassen)
 docs/      Detail-Dokumentation
@@ -108,6 +112,7 @@ Nach Änderungen an Labels immer: `docker compose up -d --force-recreate`
 | Neue App hinzufügen | [docs/neue-app.md](docs/neue-app.md) |
 | Saba-Chat mit lokalem Modell | [docs/saba.md](docs/saba.md) |
 | Open WebUI (Chat und Modelle verwalten) | [docs/openwebui.md](docs/openwebui.md) |
+| Ollama-API von aussen (API-Key) | [docs/ollama-api.md](docs/ollama-api.md) |
 | Shopware-Launcher | [docs/shopware-launcher.md](docs/shopware-launcher.md) |
 | Shopware-Launcher (.NET) | [docs/shopware-launcher-dotnet.md](docs/shopware-launcher-dotnet.md) |
 | Troubleshooting | [docs/troubleshooting.md](docs/troubleshooting.md) |
