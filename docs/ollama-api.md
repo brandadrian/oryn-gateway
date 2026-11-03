@@ -51,6 +51,8 @@ Invoke-RestMethod https://ollama.homelab.brandadrian.com/api/tags -Headers @{ Au
 
 OpenAI-kompatible Clients: Base-URL `https://ollama.homelab.brandadrian.com/v1`, API-Key = der Key.
 
+GitHub Copilot (VS Code): Chat: Manage Language Models → OpenAI Compatible → Base-URL `https://ollama.homelab.brandadrian.com/v1`, API-Key, Modell-ID (z.B. `qwen2.5-coder:14b`).
+
 Die `ollama`-CLI (`OLLAMA_HOST=...`) kann keinen Header mitschicken und funktioniert deshalb nicht von aussen.
 
 ## Erlaubte Endpunkte
@@ -59,6 +61,8 @@ Die `ollama`-CLI (`OLLAMA_HOST=...`) kann keinen Header mitschicken und funktion
 |--------|-------------------|
 | `/api/chat`, `/api/generate`, `/api/embed`, `/api/embeddings` | `/v1/chat/completions`, `/v1/completions`, `/v1/embeddings` |
 | `/api/tags`, `/api/show`, `/api/ps`, `/api/version` | `/v1/models` |
+
+`/api/models`, `/api/chat/completions` und `/api/completions` werden auf `/v1/...` umgeleitet, weil GitHub Copilot diese Pfade aufruft.
 
 Gesperrt (404): `pull`, `push`, `create`, `copy`, `delete`, `blobs`. Modelle verwalten nur lokal oder über [Open WebUI](openwebui.md).
 
