@@ -49,19 +49,13 @@ Zum Einfügen ins Feld "Beschreibung":
 
 | Modell | Beschreibung |
 |--------|--------------|
-| `saba:latest` | Eigener Chat-Bot Saba mit eigenem Sprachstil, locker und witzig. |
-| `gemma3:12b` | Allrounder für Alltag und gutes Deutsch, versteht auch Bilder. |
-| `qwen3.8:27b` | Für anspruchsvolle Analysen, grösser als der VRAM und deshalb langsamer. |
-| `gpt-oss:20b` | Für schwierige Fragen mit längerem Nachdenken, grosses Modell, ohne Bilder. |
+| `qwen3.8:27b-agent` | Für Agenten und Tool-Calls (z.B. Copilot): stabil, 128k Kontext, läuft komplett auf der GPU. |
+| `qwen3.8:27b` | Das klügste Modell: Analysen und Code, läuft komplett auf der GPU. |
+| `gpt-oss:20b` | Sehr schnell, für Chat und schwierige Fragen mit längerem Nachdenken, ohne Bilder. |
 | `qwen3.5:9b` | Schneller Allrounder mit Denkmodus, versteht auch Bilder. |
-| `qwen3.5:4b` | Klein und schnell für kurze Fragen und einfache Aufgaben. |
-| `qwen2.5-coder:14b` | Für Code schreiben, erklären und korrigieren. |
 | `qwen3-vl:8b-instruct` | Für Bilder und Rechnungen: Inhalte direkt auslesen, ohne Denkmodus. |
-| `qwen3-vl:8b` | Für Bilder, wenn das Modell länger nachdenken soll. |
-| `qwen3-vl:2b` | Kleines Bildmodell für schnelle, einfache Bildfragen. |
-| `translategemma:12b` | Spezialisiert auf Übersetzungen. |
-| `mistral:latest` | Älterer, kleiner Allrounder für einfache Textaufgaben. |
-| `llama3.1:8b` | Älterer, kleiner Allrounder für einfache Chats und Texte. |
+| `saba:latest` | Eigener Chat-Bot Saba mit eigenem Sprachstil, locker und witzig. |
+| `gemma3:27b` | Basis für Saba. Gutes Deutsch, kreativ, versteht auch Bilder. |
 
 ## Update
 
@@ -73,4 +67,4 @@ Version in `docker-compose.yml` anpassen (bewusst fest, weil Updates die Datenba
 - Installieren und Löschen von Modellen geht nur als Admin.
 - Die Login-Seite ist öffentlich, deshalb ein langes Passwort verwenden.
 - Einstellungen wie `ENABLE_SIGNUP` speichert Open WebUI nach dem ersten Start in der Datenbank. Ab dann gilt, was in den Admin-Einstellungen steht.
-- Ollama selbst ist von aussen nicht erreichbar, nur über Open WebUI.
+- Ollama selbst ist von aussen nur über Open WebUI und die [Ollama-API mit Key](ollama-api.md) erreichbar.

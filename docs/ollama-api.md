@@ -40,7 +40,7 @@ Header `Authorization: Bearer <Key>` mitschicken.
 curl https://ollama.homelab.brandadrian.com/api/tags -H "Authorization: Bearer <Key>"
 
 curl https://ollama.homelab.brandadrian.com/api/chat -H "Authorization: Bearer <Key>" \
-  -d '{"model":"gemma3:12b","messages":[{"role":"user","content":"Hallo"}]}'
+  -d '{"model":"gpt-oss:20b","messages":[{"role":"user","content":"Hallo"}]}'
 ```
 
 PowerShell (`curl` ist dort ein Alias für `Invoke-WebRequest`, deshalb `curl.exe` oder):
@@ -51,7 +51,21 @@ Invoke-RestMethod https://ollama.homelab.brandadrian.com/api/tags -Headers @{ Au
 
 OpenAI-kompatible Clients: Base-URL `https://ollama.homelab.brandadrian.com/v1`, API-Key = der Key.
 
-GitHub Copilot (VS Code): Chat: Manage Language Models → OpenAI Compatible → Base-URL `https://ollama.homelab.brandadrian.com/v1`, API-Key, Modell-ID (z.B. `qwen2.5-coder:14b`).
+GitHub Copilot (VS Code): Chat: Manage Language Models → OpenAI Compatible → Base-URL `https://ollama.homelab.brandadrian.com/v1`, API-Key, Modell-ID (z.B. `qwen3.8:27b-agent`).
+
+## Modelle
+
+GPU: AMD Radeon AI PRO R9700 (32 GB). Alle Modelle laufen komplett auf der GPU (Messung 2026-11-05, 1,8k Token Prompt).
+
+| Modell | Wofür | Prompt / Ausgabe | VRAM |
+|--------|-------|------------------|------|
+| `qwen3.8:27b-agent` | Agenten und Tool-Calls (Copilot): temperature 0.3, 128k Kontext. Modelfile: [ollama-api/Modelfile.qwen38-agent](../ollama-api/Modelfile.qwen38-agent) | 1000 / 41–65 t/s | 18 GB |
+| `qwen3.8:27b` | Code und Analysen im Chat (gleiche Dateien wie `qwen3.8:27b-agent`) | 1000 / 41 t/s | 18 GB |
+| `gpt-oss:20b` | Schneller Chat, schwierige Fragen | 3600 / 102 t/s | 13 GB |
+| `qwen3.5:9b` | Schnell und klein, versteht Bilder | 3550 / 79 t/s | 8,6 GB |
+| `qwen3-vl:8b-instruct` | Bilder und Rechnungen auslesen | | 6 GB |
+
+`gemma3:27b` ist als Basis für [Saba](saba.md) installiert (`saba` nutzt dieselben Dateien).
 
 Die `ollama`-CLI (`OLLAMA_HOST=...`) kann keinen Header mitschicken und funktioniert deshalb nicht von aussen.
 
