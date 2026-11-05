@@ -67,4 +67,4 @@ Version in `docker-compose.yml` anpassen (bewusst fest, weil Updates die Datenba
 - Installieren und Löschen von Modellen geht nur als Admin.
 - Die Login-Seite ist öffentlich, deshalb ein langes Passwort verwenden.
 - Einstellungen wie `ENABLE_SIGNUP` speichert Open WebUI nach dem ersten Start in der Datenbank. Ab dann gilt, was in den Admin-Einstellungen steht.
-- Ollama selbst ist von aussen nur über Open WebUI und die [Ollama-API mit Key](ollama-api.md) erreichbar.
+- Ollama selbst ist von aussen nur über Open WebUI und die [LLM-API mit Key](https://github.com/brandadrian/llm-gateway) (Repo llm-gateway) erreichbar.
