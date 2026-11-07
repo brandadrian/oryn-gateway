@@ -8,7 +8,7 @@ Gleiche Funktion, API und UI wie [shopware-launcher](shopware-launcher.md), umge
 
 | Was | Wert |
 |-----|------|
-| URL | https://shopware-dotnet.homelab.brandadrian.com · lokal https://shopware-dotnet.localhost |
+| URL | https://shopware-dotnet.oryn.brandadrian.com · lokal https://shopware-dotnet.localhost |
 | Instanzen, SSH, Sicherheit | wie [JS-Variante](shopware-launcher.md) |
 
 ## Starten

@@ -2,14 +2,14 @@
 
 [← zurück zur README](../README.md)
 
-Web-App unter **https://shopware.homelab.brandadrian.com** (lokal: https://shopware.localhost), um Shopware-Instanzen per Klick zu starten. Pro Instanz läuft ein [dockware/dev](https://hub.docker.com/r/dockware/dev)-Container (Shopware + MySQL + Demodaten + SSH, PHP, Composer, Node).
+Web-App unter **https://shopware.oryn.brandadrian.com** (lokal: https://shopware.localhost), um Shopware-Instanzen per Klick zu starten. Pro Instanz läuft ein [dockware/dev](https://hub.docker.com/r/dockware/dev)-Container (Shopware + MySQL + Demodaten + SSH, PHP, Composer, Node).
 
 | Was | Wert |
 |-----|------|
-| Shop | `https://sw-<name>-<guid>.homelab.brandadrian.com` |
+| Shop | `https://sw-<name>-<guid>.oryn.brandadrian.com` |
 | Admin | `…/admin`, User `admin`, Passwort zufällig (steht in der UI) |
 | Lokal | `https://sw-<name>-<guid>.localhost` |
-| SSH / SFTP | `ssh -p 2200X dev@sw-<name>-<guid>.homelab.brandadrian.com`, Passwort in der UI |
+| SSH / SFTP | `ssh -p 2200X dev@sw-<name>-<guid>.oryn.brandadrian.com`, Passwort in der UI |
 | Projekt im Container | `/var/www/html` |
 | Max. Instanzen | 3 (je ca. 1,5–2 GB RAM) |
 | Auto-Löschen | optional nach 60 Min. |

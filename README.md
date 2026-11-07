@@ -1,4 +1,4 @@
-# homelab-proxy
+# oryn-gateway
 
 Öffentliche Docker-Apps auf einem Windows-Rechner hosten, mit **Traefik** als Reverse Proxy und automatischem HTTPS (Let's Encrypt).
 
@@ -18,7 +18,7 @@ flowchart LR
     le[Let's Encrypt]
 
     subgraph ionos[IONOS]
-        dns["DNS<br/>CNAME *.homelab, *.oryn →<br/>brandadrian.internet-box.ch"]
+        dns["DNS<br/>CNAME *.oryn →<br/>brandadrian.internet-box.ch"]
     end
 
     subgraph home[Zuhause]
@@ -38,7 +38,7 @@ flowchart LR
         end
     end
 
-    user -- "1. app.homelab.brandadrian.com?" --> dns
+    user -- "1. app.oryn.brandadrian.com?" --> dns
     user -- "2. HTTPS :443" --> router
     router --> fw --> traefik
     traefik -- "Host-Regel (Labels)" --> whoami
@@ -56,7 +56,7 @@ flowchart LR
 ## Struktur
 
 ```
-traefik/   Reverse Proxy (läuft einmal)
+docker-compose.yml  Traefik (Projekt oryn-gateway), Zertifikate in traefik/letsencrypt/
 whoami/    Beispiel-App (zeigt Request-Infos)
 website/   Beispiel-App (statische HTML-Seite mit nginx)
 shopware-launcher/  Web-App zum Starten von Shopware-Instanzen (dockware)
@@ -76,7 +76,7 @@ und hängt wie die Apps hier am Docker-Netz `proxy`.
 
 ## Quickstart
 
-1. **DNS:** IONOS-CNAME `*.homelab` → `brandadrian.internet-box.ch` → [docs/dns-ionos.md](docs/dns-ionos.md)
+1. **DNS:** IONOS-CNAME `*.oryn` → `brandadrian.internet-box.ch` → [docs/dns-ionos.md](docs/dns-ionos.md)
 2. **Router:** feste IP `192.168.1.117`, Portweiterleitung 80/443 → [docs/router-swisscom.md](docs/router-swisscom.md)
 3. **DynDNS:** in der Internet-Box aktiv → [docs/dyndns.md](docs/dyndns.md)
 4. **Windows-Firewall** 80/443 öffnen → [docs/windows-docker.md](docs/windows-docker.md)
@@ -85,12 +85,12 @@ und hängt wie die Apps hier am Docker-Netz `proxy`.
 ```bash
 docker network create proxy        # einmalig, vor dem ersten Start!
 
-cd traefik && docker compose up -d
-cd ../whoami && docker compose up -d
+docker compose up -d               # Traefik, im Hauptordner
+cd whoami && docker compose up -d
 cd ../website && docker compose up -d
 ```
 
-6. **Testen:** Handy ohne WLAN → https://website.homelab.brandadrian.com, lokal → https://website.localhost
+6. **Testen:** Handy ohne WLAN → https://website.oryn.brandadrian.com, lokal → https://website.localhost
 
 Nach Änderungen an Labels immer: `docker compose up -d --force-recreate`
 

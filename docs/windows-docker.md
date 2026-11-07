@@ -23,14 +23,14 @@ Prüfen: `docker network ls` → `proxy` muss in der Liste sein.
 
 ## Konfigurieren
 
-- `traefik/docker-compose.yml`: E-Mail für Let's Encrypt (`acme.email`, aktuell `brandadrian@gmail.com`). Wird nur für Ablauf-/Problem-Warnungen der Zertifikate verwendet.
+- `docker-compose.yml` (Hauptordner): E-Mail für Let's Encrypt (`acme.email`, aktuell `brandadrian@gmail.com`). Wird nur für Ablauf-/Problem-Warnungen der Zertifikate verwendet.
 
 > Wird die E-Mail geändert: `traefik/letsencrypt/acme.json` löschen und Traefik mit `docker compose up -d --force-recreate` neu starten. Sonst bleibt der alte ACME-Account mit der alten Mail gespeichert.
 
 ## Starten
 
 ```bash
-cd traefik
+cd C:\github\oryn-gateway
 docker compose up -d
 
 cd ../whoami
@@ -43,7 +43,7 @@ docker compose up -d
 ## Testen
 
 - Lokal: https://website.localhost (siehe [Lokal testen](lokal-testen.md))
-- Von außen: **Handy mit WLAN aus** (mobile Daten) → `https://website.homelab.brandadrian.com` und `https://whoami.homelab.brandadrian.com`. Aus dem eigenen WLAN klappt der Aufruf der öffentlichen Domain je nach Router nicht (NAT-Loopback), das ist kein Fehler.
+- Von außen: **Handy mit WLAN aus** (mobile Daten) → `https://website.oryn.brandadrian.com` und `https://whoami.oryn.brandadrian.com`. Aus dem eigenen WLAN klappt der Aufruf der öffentlichen Domain je nach Router nicht (NAT-Loopback), das ist kein Fehler.
 - Zertifikat: Schloss im Browser muss „Let's Encrypt“ zeigen. Das erste Zertifikat kann nach dem Start ca. 1 Minute dauern.
 
 ## Labels geändert? → neu erstellen

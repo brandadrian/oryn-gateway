@@ -12,7 +12,7 @@ Let's Encrypt erreicht Port 80 nicht. Prüfen: DNS-Eintrag (`nslookup`), Portwei
 
 ## Port 80 vom Provider gesperrt / belegt → TLS-Challenge
 
-Statt HTTP-Challenge (Port 80) kann Traefik das Zertifikat über Port 443 holen. In `traefik/docker-compose.yml`:
+Statt HTTP-Challenge (Port 80) kann Traefik das Zertifikat über Port 443 holen. In `docker-compose.yml` (Hauptordner):
 
 ```yaml
       # - --certificatesresolvers.le.acme.httpchallenge.entrypoint=web

@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.routers.meineapp.rule=Host(`meineapp.homelab.brandadrian.com`)
+      - traefik.http.routers.meineapp.rule=Host(`meineapp.oryn.brandadrian.com`)
       - traefik.http.routers.meineapp.entrypoints=websecure
       - traefik.http.routers.meineapp.tls.certresolver=le
       - traefik.http.routers.meineapp.service=meineapp
