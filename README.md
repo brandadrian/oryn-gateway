@@ -18,7 +18,7 @@ flowchart LR
     le[Let's Encrypt]
 
     subgraph ionos[IONOS]
-        dns["DNS<br/>CNAME *.homelab, llm-gateway →<br/>brandadrian.internet-box.ch"]
+        dns["DNS<br/>CNAME *.homelab, *.oryn →<br/>brandadrian.internet-box.ch"]
     end
 
     subgraph home[Zuhause]
@@ -32,7 +32,7 @@ flowchart LR
                 website[website]
                 saba[saba-Chat]
                 owui[Open WebUI]
-                gw["llm-gateway (eigenes Repo)<br/>API · Monitoring"]
+                gw["oryn-ai-portal (eigenes Repo)<br/>API · Monitoring · Token"]
                 swl[Shopware-Launcher]
                 sw[(sw-* Instanzen)]
                 app[weitere Apps]
@@ -49,7 +49,7 @@ flowchart LR
     saba --> ollama
     traefik --> owui
     owui --> ollama
-    traefik -- "llm-gateway.brandadrian.com" --> gw
+    traefik -- "*.oryn.brandadrian.com" --> gw
     gw --> ollama
     traefik --> swl
     swl -- "Docker-API" --> sw
@@ -72,7 +72,7 @@ shopware-launcher-dotnet/  dasselbe in ASP.NET Core 10 (nur eine Variante laufen
 docs/      Detail-Dokumentation
 ```
 
-Die LLM-API von aussen (API-Key, eigene Modelle, Monitoring) liegt im eigenen Repo [llm-gateway](https://github.com/brandadrian/llm-gateway)
+Die LLM-API von aussen (API-Key, eigene Modelle, Monitoring) liegt im eigenen Repo [oryn-ai-portal](https://github.com/brandadrian/oryn-ai-portal)
 und hängt wie die Apps hier am Docker-Netz `proxy`.
 
 ## Voraussetzungen
@@ -114,7 +114,7 @@ Nach Änderungen an Labels immer: `docker compose up -d --force-recreate`
 | Neue App hinzufügen | [docs/neue-app.md](docs/neue-app.md) |
 | Saba-Chat mit lokalem Modell | [docs/saba.md](docs/saba.md) |
 | Open WebUI (Chat und Modelle verwalten) | [docs/openwebui.md](docs/openwebui.md) |
-| LLM-API von aussen, Modelle, Monitoring | Repo [llm-gateway](https://github.com/brandadrian/llm-gateway) |
+| LLM-API von aussen, Modelle, Monitoring | Repo [oryn-ai-portal](https://github.com/brandadrian/oryn-ai-portal) |
 | Shopware-Launcher | [docs/shopware-launcher.md](docs/shopware-launcher.md) |
 | Shopware-Launcher (.NET) | [docs/shopware-launcher-dotnet.md](docs/shopware-launcher-dotnet.md) |
 | Troubleshooting | [docs/troubleshooting.md](docs/troubleshooting.md) |
