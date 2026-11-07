@@ -7,7 +7,7 @@ services:
     command: node server.js
     env_file: .env
     environment:
-      - DOMAIN=homelab.brandadrian.com
+      - DOMAIN=oryn.brandadrian.com
       - DOCKER_NETWORK=proxy
       - MAX_INSTANCES=3
       - SSH_PORT_START=22001     # Instanzen bekommen 22001, 22002, 22003
@@ -18,7 +18,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
       - traefik.enable=true
-      - traefik.http.routers.shopware.rule=Host(`shopware.homelab.brandadrian.com`)
+      - traefik.http.routers.shopware.rule=Host(`shopware.oryn.brandadrian.com`)
       - traefik.http.routers.shopware.entrypoints=websecure
       - traefik.http.routers.shopware.tls.certresolver=le
       - traefik.http.routers.shopware.service=shopware

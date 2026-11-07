@@ -6,7 +6,7 @@ services:
       - ./html:/usr/share/nginx/html:ro
     labels:
       - traefik.enable=true
-      - traefik.http.routers.website.rule=Host(`website.homelab.brandadrian.com`)
+      - traefik.http.routers.website.rule=Host(`website.oryn.brandadrian.com`)
       - traefik.http.routers.website.entrypoints=websecure
       - traefik.http.routers.website.tls.certresolver=le
       - traefik.http.routers.website.service=website

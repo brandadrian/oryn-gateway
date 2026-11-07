@@ -7,7 +7,7 @@ const int = (value, fallback) => {
 export const config = Object.freeze({
   port: int(process.env.PORT, 3000),
   dockerSocket: process.env.DOCKER_SOCKET || '/var/run/docker.sock',
-  domain: process.env.DOMAIN || 'homelab.brandadrian.com',
+  domain: process.env.DOMAIN || 'oryn.brandadrian.com',
   image: process.env.IMAGE || 'dockware/dev',
   network: process.env.DOCKER_NETWORK || 'proxy',
   maxInstances: int(process.env.MAX_INSTANCES, 3),

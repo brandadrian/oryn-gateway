@@ -8,7 +8,7 @@ public sealed class LauncherOptions
     public const string Section = "Launcher";
 
     [Required] public string DockerSocket { get; init; } = "/var/run/docker.sock";
-    [Required] public string Domain { get; init; } = "homelab.brandadrian.com";
+    [Required] public string Domain { get; init; } = "oryn.brandadrian.com";
     [Required] public string Image { get; init; } = "dockware/dev";
     [Required] public string Network { get; init; } = "proxy";
     [Range(1, 20)] public int MaxInstances { get; init; } = 3;

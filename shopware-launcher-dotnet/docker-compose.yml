@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      - Launcher__Domain=homelab.brandadrian.com
+      - Launcher__Domain=oryn.brandadrian.com
       - Launcher__Network=proxy
       - Launcher__MaxInstances=3
       - Launcher__SshPortStart=22001     # Instanzen bekommen 22001, 22002, 22003
@@ -18,7 +18,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
       - traefik.enable=true
-      - traefik.http.routers.shopware-dotnet.rule=Host(`shopware-dotnet.homelab.brandadrian.com`)
+      - traefik.http.routers.shopware-dotnet.rule=Host(`shopware-dotnet.oryn.brandadrian.com`)
       - traefik.http.routers.shopware-dotnet.entrypoints=websecure
       - traefik.http.routers.shopware-dotnet.tls.certresolver=le
       - traefik.http.routers.shopware-dotnet.service=shopware-dotnet

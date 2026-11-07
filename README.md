@@ -30,9 +30,7 @@ flowchart LR
                 traefik[Traefik<br/>Reverse Proxy]
                 whoami[whoami]
                 website[website]
-                saba[saba-Chat]
-                owui[Open WebUI]
-                gw["oryn-ai-portal (eigenes Repo)<br/>API · Monitoring · Token"]
+                gw["oryn-ai-portal (eigenes Repo)<br/>API · Monitoring · Open WebUI"]
                 swl[Shopware-Launcher]
                 sw[(sw-* Instanzen)]
                 app[weitere Apps]
@@ -45,10 +43,6 @@ flowchart LR
     router --> fw --> traefik
     traefik -- "Host-Regel (Labels)" --> whoami
     traefik --> website
-    traefik --> saba
-    saba --> ollama
-    traefik --> owui
-    owui --> ollama
     traefik -- "*.oryn.brandadrian.com" --> gw
     gw --> ollama
     traefik --> swl
@@ -65,14 +59,12 @@ flowchart LR
 traefik/   Reverse Proxy (läuft einmal)
 whoami/    Beispiel-App (zeigt Request-Infos)
 website/   Beispiel-App (statische HTML-Seite mit nginx)
-saba/      Einfacher Chat mit lokalem Modell (Ollama nativ unter Windows)
-openwebui/ Chat und Modellverwaltung mit Login (Open WebUI)
 shopware-launcher/  Web-App zum Starten von Shopware-Instanzen (dockware)
 shopware-launcher-dotnet/  dasselbe in ASP.NET Core 10 (nur eine Variante laufen lassen)
 docs/      Detail-Dokumentation
 ```
 
-Die LLM-API von aussen (API-Key, eigene Modelle, Monitoring) liegt im eigenen Repo [oryn-ai-portal](https://github.com/brandadrian/oryn-ai-portal)
+Die LLM-API von aussen (API-Key, eigene Modelle, Monitoring) und Open WebUI liegen im eigenen Repo [oryn-ai-portal](https://github.com/brandadrian/oryn-ai-portal)
 und hängt wie die Apps hier am Docker-Netz `proxy`.
 
 ## Voraussetzungen
@@ -112,9 +104,7 @@ Nach Änderungen an Labels immer: `docker compose up -d --force-recreate`
 | Firewall, Docker-Netzwerk, Konfiguration, Starten, Testen | [docs/windows-docker.md](docs/windows-docker.md) |
 | Lokal testen (`*.localhost`) | [docs/lokal-testen.md](docs/lokal-testen.md) |
 | Neue App hinzufügen | [docs/neue-app.md](docs/neue-app.md) |
-| Saba-Chat mit lokalem Modell | [docs/saba.md](docs/saba.md) |
-| Open WebUI (Chat und Modelle verwalten) | [docs/openwebui.md](docs/openwebui.md) |
-| LLM-API von aussen, Modelle, Monitoring | Repo [oryn-ai-portal](https://github.com/brandadrian/oryn-ai-portal) |
+| LLM-API von aussen, Modelle, Monitoring, Open WebUI | Repo [oryn-ai-portal](https://github.com/brandadrian/oryn-ai-portal) |
 | Shopware-Launcher | [docs/shopware-launcher.md](docs/shopware-launcher.md) |
 | Shopware-Launcher (.NET) | [docs/shopware-launcher-dotnet.md](docs/shopware-launcher-dotnet.md) |
 | Troubleshooting | [docs/troubleshooting.md](docs/troubleshooting.md) |

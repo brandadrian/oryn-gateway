@@ -1,3 +1,9 @@
+# oryn-gateway: Traefik als Reverse Proxy für alle Apps (oryn-ai-portal, Shopware-Launcher, Beispiel-Apps).
+# Start (im Hauptordner):  docker compose up -d
+# Die Apps hängen am externen Docker-Netz "proxy" (einmalig: docker network create proxy)
+# und bringen ihre Routing-Regeln als Labels selbst mit.
+name: oryn-gateway
+
 services:
   traefik:
     image: traefik:v3.1
@@ -19,7 +25,8 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./letsencrypt:/letsencrypt
+      # Zertifikate (acme.json), nicht im Git
+      - ./traefik/letsencrypt:/letsencrypt
     networks:
       - proxy
 
