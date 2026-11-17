@@ -1,0 +1,41 @@
+# Gmail + Google Kalender als EIN Tool für Open WebUI.
+# workspace-mcp (Gmail + Calendar, ein OAuth-Login) hinter mcpo (MCP → OpenAPI).
+# Nur im Docker-Netz "proxy" erreichbar, kein Traefik.
+# Open WebUI (Typ OpenAPI): http://gmail-mcp:8000, Bearer = MCPO_API_KEY
+
+services:
+  gmail-mcp:
+    image: ghcr.io/open-webui/mcpo:main
+    container_name: gmail-mcp
+    restart: unless-stopped
+    environment:
+      # gleiche Keys-Datei wie bisher (Gmail API + Calendar API im Projekt aktiv)
+      GOOGLE_CLIENT_SECRET_PATH: /root/.gmail-mcp/gcp-oauth.keys.json
+      WORKSPACE_MCP_CREDENTIALS_DIR: /root/.gmail-mcp/workspace
+      USER_GOOGLE_EMAIL: ${GOOGLE_EMAIL:?GOOGLE_EMAIL in .env setzen}
+      # Google-Login: Callback-Server im Container, Browser auf dem Host ruft localhost:<Port> auf.
+      # Container- und Host-Port müssen gleich sein.
+      GOOGLE_OAUTH_REDIRECT_URI: http://localhost:${GOOGLE_AUTH_PORT:-8001}/oauth2callback
+      WORKSPACE_MCP_BASE_URI: http://0.0.0.0
+      OAUTHLIB_INSECURE_TRANSPORT: "1"
+    command:
+      - --port=8000
+      - --api-key=${MCPO_API_KEY:?MCPO_API_KEY in .env setzen}
+      - --
+      - uvx
+      - workspace-mcp==2.5.0
+      - --single-user
+      - --tools
+      - gmail
+      - calendar
+    ports:
+      # nur für den Google-Login
+      - 127.0.0.1:${GOOGLE_AUTH_PORT:-8001}:${GOOGLE_AUTH_PORT:-8001}
+    volumes:
+      - ${USERPROFILE}/.gmail-mcp:/root/.gmail-mcp
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
