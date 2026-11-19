@@ -36,6 +36,7 @@ flowchart LR
                 app[weitere Apps]
             end
         end
+        nas[(Synology-NAS<br/>192.168.1.120 · DSM :5001)]
     end
 
     user -- "1. app.oryn.brandadrian.com?" --> dns
@@ -49,6 +50,7 @@ flowchart LR
     swl -- "Docker-API" --> sw
     traefik --> sw
     traefik --> app
+    traefik -- "File-Provider<br/>traefik/dynamic/" --> nas
     le -- "HTTP-Challenge :80" --> router
     traefik -. "Zertifikat anfordern" .-> le
 ```
@@ -57,6 +59,7 @@ flowchart LR
 
 ```
 docker-compose.yml  Traefik (Projekt oryn-gateway), Zertifikate in traefik/letsencrypt/
+traefik/dynamic/    Routen zu Geräten ausserhalb von Docker (z.B. nas.yml)
 whoami/    Beispiel-App (zeigt Request-Infos)
 website/   Beispiel-App (statische HTML-Seite mit nginx)
 shopware-launcher/  Web-App zum Starten von Shopware-Instanzen (dockware)
@@ -104,6 +107,7 @@ Nach Änderungen an Labels immer: `docker compose up -d --force-recreate`
 | Firewall, Docker-Netzwerk, Konfiguration, Starten, Testen | [docs/windows-docker.md](docs/windows-docker.md) |
 | Lokal testen (`*.localhost`) | [docs/lokal-testen.md](docs/lokal-testen.md) |
 | Neue App hinzufügen | [docs/neue-app.md](docs/neue-app.md) |
+| Geräte ausserhalb von Docker (Synology-NAS) | [docs/externe-geraete.md](docs/externe-geraete.md) |
 | LLM-API von aussen, Modelle, Monitoring, Open WebUI | Repo [oryn-ai-portal](https://github.com/brandadrian/oryn-ai-portal) |
 | Shopware-Launcher | [docs/shopware-launcher.md](docs/shopware-launcher.md) |
 | Shopware-Launcher (.NET) | [docs/shopware-launcher-dotnet.md](docs/shopware-launcher-dotnet.md) |

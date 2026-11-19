@@ -1,0 +1,26 @@
+# Synology-NAS (DSM) im LAN, erreichbar unter https://nas.oryn.brandadrian.com
+# Traefik terminiert TLS und geht per HTTPS auf DSM-Port 5001.
+# (Über HTTP :5000 leitet DSM per JavaScript auf <host>:5001 um, weil
+#  "HTTP auf HTTPS umleiten" in DSM aktiv ist. Das schlägt von aussen fehl.)
+http:
+  routers:
+    nas:
+      rule: Host(`nas.oryn.brandadrian.com`)
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: le
+      service: nas
+
+  services:
+    nas:
+      loadBalancer:
+        passHostHeader: true
+        serversTransport: nas-selfsigned
+        servers:
+          - url: https://192.168.1.120:5001
+
+  serversTransports:
+    # DSM nutzt ein selbstsigniertes Zertifikat
+    nas-selfsigned:
+      insecureSkipVerify: true
